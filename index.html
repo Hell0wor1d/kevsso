@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Kevsso demo page</title>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js "></script>
+		<!-- <script src="/js/jquery-migrate-1.2.1.min.js"></script> -->
+		<script src="js/kev-sso-1.2.3.min.js"></script>
+		<script type="text/javascript" >
+			var auth = null;
+			//for testing, use default settings baseApiAddress: 'http://192.168.0.233:911', passportKeyName: 'passport'
+			//auth = new kevsso.auth();
+			//manually set options.
+			auth = new kevsso.auth('http://10.96.96.193:911', 'passport');
+			$().ready(function() {
+				if (auth.isLogin()) {
+					alert('already login.');
+				} else {
+					auth.login(function(data) {
+						alert('login successfully.');
+					});
+				}
+			});
+
+			function login() {
+				//Login url
+				window.location = 'http://10.96.96.193:911/sso';
+			}
+
+			function logout() {
+				auth.logout('10.96.99.84', function() {
+					alert('logout successfully.');
+					window.location.reload();
+				});
+			}
+
+			function test() {
+                //kevsso.util.delCookie('passport');
+				kevsso.util.clearCookie('passport');
+			}
+
+		</script>
+	</head>
+	<body>
+		<input type="button" onclick="login();" value="go to login page"/>
+		<input type="button" onclick="logout();" value="single sign out"/>
+		<input type="button" onclick="test();" value="test"/>
+		<br />
+	</body>
+</html>

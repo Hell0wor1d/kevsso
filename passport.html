@@ -12,7 +12,7 @@
 			//for this demo, I just use JavaScript to simulate the back-end.
 			//this page should be a back-end interface.
 			$().ready(function() {
-				//get passport from GEDU query-string
+				//get passport from query-string
 				var res = window.location.search;
 				var p = kevsso.util.queryString(res, 'p');
 				if (p === '') {
